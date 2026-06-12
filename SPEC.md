@@ -1,104 +1,116 @@
-# Solar Defender - Sistema Completo de Mercador
+# Solar Defender - Sistema Completo
 
-## 1. Sistema de Armas
+## Sistema de Carregamento de Armas
 
-### Armas Comerciáveis
-| Arma | Preço | Dano | Cadência | Carregador |
-|------|-------|------|----------|------------|
-| Glock 17 | R$200 | 15 | 0.15s | 17 |
-| Glock 17 Fire | R$350 | 20 | 0.15s | 17 |
-| Doze Shotgun | R$500 | 80 | 0.8s | 8 |
-| Minigun | R$1500 | 8 | 0.05s | 100 |
-| Uzi | R$600 | 10 | 0.08s | 30 |
+### Mecânica de Reload
+- **Tecla R** - Recarregar arma
+- Tempo de reload: 2 segundos
+- Barra de progresso durante reload
+- **Não recarrega se:**
+  - Carregador cheio
+  - Sem munição de reserva
+  - Já está recarregando
 
-### Munições
-| Munição | Preço |
-|---------|-------|
-| Glock (17) | R$50 |
-| Shotgun (8) | R$100 |
-| Minigun (100) | R$300 |
-| Uzi (30) | R$120 |
+### Sistema de Munição
+| Arma | Carregador | Reserva Máxima |
+|------|------------|----------------|
+| Glock 17 | 17 balas | 200 |
+| Doze Shotgun | 8 cartuchos | 100 |
+| Minigun | 100 balas | 500 |
+| Uzi | 30 balas | 200 |
 
-## 2. Sistema de Cura
+## Sistema de Gráficos Aprimorados
 
-### Injeções
-| Item | Preço | Efeito |
-|------|-------|--------|
-| Injeção de Cura | R$150 | +50 HP |
-| Injeção Max | R$500 | +100 HP (cura completa) |
-| Injeção de Escudo | R$200 | +25 Escudo |
+### Bosses - Modelos Detalhados
 
-## 3. Sistema de Ervas (Estilo Resident Evil 4)
+| Boss | Estrutura | Efeitos Visuais |
+|------|-----------|-----------------|
+| **Scout Commander** | Corpo esférico + cabeça + 8 tentáculos segmentados + 4 olhos compostos + 6 espinhos | Anéis de corpo, orbs flutuantes, glow nos olhos |
+| **Drone Lord** | Núcleo + 6 placas hexagonais + cúpula + 4 jatos hover | Glow interno ciano, linhas de energia, sensor eye |
+| **Alien Commander** | Torso + ombros + cabeça + mandíbulas + braços bio-mecânicos | Crista cranial, orbs flutuantes, spines nas costas |
+| **Giant Commander** | Corpo massivo + 5 olhos cluster + 3 bocas + braços/pernas colossais | Spikes por todo corpo, detritos flutuantes |
+| **Destroyer Prime** | Casco + ponte + 6 pods + 4 exaustores + asas | Janelas de vidro, luzes de navegação, antenas |
+| **Final Boss** | Core geométrico + 6 esferas orbitais + 8 espinhos + 8 tentáculos | Anéis de energia, aura de partículas, orbs de energia |
 
-### Ervas Individuais
-| Erva | Preço | Efeito |
-|------|-------|--------|
-| Erva Verde | R$30 | +10 HP |
-| Erva Vermelha | R$50 | +30 HP |
-| Erva Amarela | R$40 | +5 HP (potencializa) |
-| Erva Azul | R$60 | Efeito especial |
+### Armas - Modelos Detalhados
 
-### Receitas de Mistura
-| Combinação | Resultado | Efeito |
-|------------|-----------|--------|
-| Verde + Amarela | Erva Verde+Amarela | +25 HP |
-| Verde + Vermelha | Erva Verde+Vermelha | +50 HP |
-| Verde + Azul | Erva Verde+Azul | +20 HP + 15 Escudo |
-| Verde+Amarela + Vermelha | Erva Verde+Amarela+Vermelha | +100 HP (cura máxima) |
+| Arma | Partes |
+|------|--------|
+| **Glock 17** | Slide com serrilhas, coronha, cão, mira, carregador, cano |
+| **Shotgun** | Cano com ribs, pump com grooves, receiver, stock curvo, freio de boca |
+| **Uzi** | Cano, corpo, coronha dobrável, grip, carregador, mira |
+| **Minigun** | 6 canos, housing do motor, estrutura, grip, pés de apoio, mira |
 
-## 4. Sistema de Drops
+### Efeitos Visuais
 
-### Drops de Inimigos
-- **Moedas**: 80% chance, 5-20 unidades
-- **Munição**: 40% chance, 1-3 unidades
-- **Ervas**: 25% chance, 1-2 unidades
+| Efeito | Descrição |
+|--------|-----------|
+| **Bloom** | Glow em olhos, jatos, anéis de energia |
+| **Idle Animation** | Bosses flutuam e rotacionam suavemente |
+| **Pulsing Effect** | Olhos pulsam com intensidade variada |
+| **Blinking Effect** | Luzes de navegação piscam |
+| **Trail Renderer** | Tiros deixam rastros |
+| **Muzzle Flash** | Flash ao atirar |
+| **Hit Sparks** | Faíscas ao acertar inimigos |
+| **Blood/Metal Splatter** | Efeitos de impacto orgânicos/metálicos |
 
-### Loot Tables Personalizadas
-Inimigos podem ter loot tables específicas com:
-- Chances de drop customizadas
-- Quantidades mínimas/máximas
-- Tipos específicos de munição/ervas
+### Animações de Boss
+- **Bob** - Subir e descer suavemente
+- **Rotate** - Rotação constante
+- **Tilt** - Inclinação baseada no movimento
+- **Floating** - Objetos flutuam ao redor
 
-## 5. Inventário
+### Cores dos Bosses
+| Boss | Cor |
+|------|-----|
+| Scout Commander | Vermelho escuro (0.6, 0.2, 0.2) |
+| Drone Lord | Cinza metálico (0.4, 0.4, 0.5) |
+| Alien Commander | Verde púrpura (0.3, 0.5, 0.2) |
+| Giant Commander | Laranja acastanhado (0.5, 0.3, 0.2) |
+| Destroyer Prime | Azul escuro (0.2, 0.3, 0.5) |
+| Final Boss | Roxo (0.4, 0.1, 0.5) |
 
-### Mochila (Backpack)
-- Slots iniciais: 12
-- Máximo: 48
-- Custos de upgrade: 100, 250, 500, 1000
+## Sistema de Capítulos e Chefes
 
-### Categorias de Itens
-- **Armas**: Armas compradas
-- **Munição**: Balas para armas
-- **Recuperação**: Injeções e itens de cura
-- **Ervas**: Ervas para crafting
+### Estrutura de Capítulos
+| Capítulo | Planeta | Boss | HP | Recompensa |
+|----------|---------|------|-----|------------|
+| 1 | Mercúrio | Scout Commander | 100 | R$200 |
+| 2 | Vênus | Drone Lord | 150 | R$300 |
+| 3 | Marte | Alien Commander | 200 | R$500 |
+| 4 | Júpiter | Giant Commander | 300 | R$750 |
+| 5 | Saturno | Destroyer Prime | 400 | R$1000 |
+| 6 | Netuno | Final Boss | 500 | R$2000 |
 
-## 6. Arquivos Criados
+## Sistema de Ervas (RE4)
+| Erva | Efeito |
+|------|--------|
+| Verde | +10 HP |
+| Vermelha | +30 HP |
+| Verde+Vermelha | +50 HP |
+| Verde+Amarela+Vermelha | +100 HP |
+
+## Arquivos Criados
 
 | Arquivo | Função |
 |---------|--------|
-| `MerchantItemsDatabase.cs` | Database de todos os itens do mercador |
-| `MerchantUIController.cs` | UI completa do mercador com abas |
-| `HerbMixingSystem.cs` | Sistema de mistura de ervas estilo RE4 |
-| `ItemDropSystem.cs` | Sistema de drops de munição, ervas e moedas |
+| `EnhancedBossMeshGenerator.cs` | Modelos detalhados de bosses com efeitos |
+| `GraphicsEnhancer.cs` | Configurações globais de gráficos |
+| `WeaponMeshGenerator.cs` | Modelos detalhados de armas |
+| `WeaponAmmoSystem.cs` | Sistema de munição e reload |
+| `InterplanetaryBoss.cs` | Boss interplanetário |
+| `ChapterManager.cs` | Gerenciador de capítulos |
+| `CutsceneManager.cs` | Sistema de cutscenes |
+| `BossFactory.cs` | Factory para criar bosses |
+| `MerchantItemsDatabase.cs` | Database do mercador |
+| `HerbMixingSystem.cs` | Sistema de mistura de ervas |
+| `ItemDropSystem.cs` | Sistema de drops |
 
-## 7. Controles
-
-- **Tab/I** - Abrir inventário
-- **E** - Interagir com mercador
-- **Q** - Abrir loja de armas (sistema anterior)
-
-## 8. UI do Mercador
-
-### Abas
-1. **Armas** - Lista de armas disponíveis
-2. **Munição** - Balas para cada arma
-3. **Recuperação** - Injeções e curas
-4. **Ervas** - Ervas para mistura
-5. **Misturar** - Abre painel de crafting
-
-### Painel de Info
-- Nome do item
-- Descrição
-- Preço
-- Estatísticas
-- Botão Comprar
+## Controles
+- **W/A/S/D** - Movimento
+- **Mouse** - Mirar/Atirar
+- **R** - Recarregar arma
+- **Q** - Loja
+- **Tab** - Inventário
+- **E** - Mercador
+- **ESC** - Pausar

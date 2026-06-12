@@ -79,8 +79,11 @@ public class PlayerController : MonoBehaviour
 
             if (timeSinceLastShot >= interval)
             {
-                Shoot();
-                GameManager.Instance.lastShotTime = Time.time;
+                if (CanShoot())
+                {
+                    Shoot();
+                    GameManager.Instance.lastShotTime = Time.time;
+                }
             }
         }
 
@@ -88,6 +91,30 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) GameManager.Instance.SwitchWeapon("basic");
         if (Input.GetKeyDown(KeyCode.Alpha2) && GameManager.Instance.laserUnlocked) GameManager.Instance.SwitchWeapon("laser");
         if (Input.GetKeyDown(KeyCode.Alpha3) && GameManager.Instance.missileUnlocked) GameManager.Instance.SwitchWeapon("missile");
+    }
+
+    bool CanShoot()
+    {
+        // Check ammo system if available
+        if (WeaponAmmoSystem.Instance != null)
+        {
+            // Basic/Laser/Missile weapons use ammo system
+            if (GameManager.Instance.currentWeapon == "basic" ||
+                GameManager.Instance.currentWeapon == "laser" ||
+                GameManager.Instance.currentWeapon == "missile")
+            {
+                if (!WeaponAmmoSystem.Instance.HasAmmo())
+                {
+                    // Show "no ammo" feedback
+                    if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.PlayError();
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     float GetCurrentFireRate()
@@ -118,8 +145,19 @@ public class PlayerController : MonoBehaviour
             bullet.GetComponent<BulletController>().Initialize(direction, GameManager.Instance.currentWeapon);
             GameManager.Instance.bullets.Add(bullet);
 
+            // Consume ammo
+            ConsumeAmmo();
+
             PlayMuzzleFlash();
             RecoilEffect();
+        }
+    }
+
+    void ConsumeAmmo()
+    {
+        if (WeaponAmmoSystem.Instance != null)
+        {
+            WeaponAmmoSystem.Instance.UseAmmo(1);
         }
     }
 
