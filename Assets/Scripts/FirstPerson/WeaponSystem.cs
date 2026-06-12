@@ -46,6 +46,10 @@ namespace SolarDefender.FirstPerson
         public GameObject shotgunPrefab;
         public GameObject riflePrefab;
 
+        [Header("Visual System")]
+        public bool useProceduralModels = true;
+        public string defaultTexture = "carbon";
+
         [Header("Animation")]
         public float weaponBobSpeed = 1f;
         public float weaponBobAmount = 0.05f;
@@ -342,12 +346,30 @@ namespace SolarDefender.FirstPerson
             }
 
             // Instancia nova arma
-            GameObject prefab = GetWeaponPrefab(currentWeapon.type);
-            if (prefab != null)
+            if (useProceduralModels && ProceduralModelSystem.Instance != null)
             {
-                GameObject weapon = Instantiate(prefab, weaponSocket);
-                weapon.transform.localPosition = Vector3.zero;
-                weapon.transform.localRotation = Quaternion.identity;
+                // Usa modelos procedurais
+                GameObject weapon = ProceduralModelSystem.Instance.CreateWeaponWithVisuals(
+                    currentWeapon.type.ToString().ToLower(),
+                    currentWeapon.type.ToString().ToLower()
+                );
+                if (weapon != null)
+                {
+                    weapon.transform.SetParent(weaponSocket);
+                    weapon.transform.localPosition = Vector3.zero;
+                    weapon.transform.localRotation = Quaternion.identity;
+                }
+            }
+            else
+            {
+                // Usa prefabs manuais
+                GameObject prefab = GetWeaponPrefab(currentWeapon.type);
+                if (prefab != null)
+                {
+                    GameObject weapon = Instantiate(prefab, weaponSocket);
+                    weapon.transform.localPosition = Vector3.zero;
+                    weapon.transform.localRotation = Quaternion.identity;
+                }
             }
         }
 

@@ -1,110 +1,104 @@
-# Solar Defender - Sistema Completo
+# Solar Defender - Sistema Completo de Mercador
 
-## 1. Sistema de Loja de Armas
+## 1. Sistema de Armas
 
-**Armas Disponíveis:**
-| Arma | Custo Base | Níveis | Dano Base | Cadência Base |
-|------|------------|--------|-----------|---------------|
-| Basic | Grátis (inicial) | 5 | 1-5 | 0.2s |
-| Laser | 100 | 5 | 3-15 | 0.15s |
-| Missile | 200 | 5 | 5-25 | 0.4s |
+### Armas Comerciáveis
+| Arma | Preço | Dano | Cadência | Carregador |
+|------|-------|------|----------|------------|
+| Glock 17 | R$200 | 15 | 0.15s | 17 |
+| Glock 17 Fire | R$350 | 20 | 0.15s | 17 |
+| Doze Shotgun | R$500 | 80 | 0.8s | 8 |
+| Minigun | R$1500 | 8 | 0.05s | 100 |
+| Uzi | R$600 | 10 | 0.08s | 30 |
 
-**Custos de Upgrade por Nível:**
-- Nível 2: 50 moedas
-- Nível 3: 100 moedas
-- Nível 4: 200 moedas
-- Nível 5: 400 moedas
+### Munições
+| Munição | Preço |
+|---------|-------|
+| Glock (17) | R$50 |
+| Shotgun (8) | R$100 |
+| Minigun (100) | R$300 |
+| Uzi (30) | R$120 |
 
-## 2. Sistema de Moedas
+## 2. Sistema de Cura
 
-- Inimigos SEMPRE dropam moedas ao morrer
-- Quantidade base: 3-10 moedas por inimigo
-- Bosses dropam 5x mais moedas
-- Moedas com física magnética em direção ao jogador
-- Moedas desaparecem após 10 segundos
+### Injeções
+| Item | Preço | Efeito |
+|------|-------|--------|
+| Injeção de Cura | R$150 | +50 HP |
+| Injeção Max | R$500 | +100 HP (cura completa) |
+| Injeção de Escudo | R$200 | +25 Escudo |
 
-## 3. Sistema de Combo
+## 3. Sistema de Ervas (Estilo Resident Evil 4)
 
-**Mecânica:**
-- A cada kill, o combo aumenta
-- Combotimeout: 3 segundos
-- Multiplicador: 1 + (combo * 0.1), máximo 5x
-- Score final = score base * multiplicador
+### Ervas Individuais
+| Erva | Preço | Efeito |
+|------|-------|--------|
+| Erva Verde | R$30 | +10 HP |
+| Erva Vermelha | R$50 | +30 HP |
+| Erva Amarela | R$40 | +5 HP (potencializa) |
+| Erva Azul | R$60 | Efeito especial |
 
-**UI:**
-- Painel de combo com animação
-- Contador animado de kills
-- Indicador de multiplicador
+### Receitas de Mistura
+| Combinação | Resultado | Efeito |
+|------------|-----------|--------|
+| Verde + Amarela | Erva Verde+Amarela | +25 HP |
+| Verde + Vermelha | Erva Verde+Vermelha | +50 HP |
+| Verde + Azul | Erva Verde+Azul | +20 HP + 15 Escudo |
+| Verde+Amarela + Vermelha | Erva Verde+Amarela+Vermelha | +100 HP (cura máxima) |
 
-## 4. Sistema de Críticos
+## 4. Sistema de Drops
 
-**Configurações:**
-- Chance base: 10%
-- Multiplicador de dano: 2x
-- Duração do efeito: 0.15s
+### Drops de Inimigos
+- **Moedas**: 80% chance, 5-20 unidades
+- **Munição**: 40% chance, 1-3 unidades
+- **Ervas**: 25% chance, 1-2 unidades
 
-**Efeitos Visuais:**
-- Texto "CRIT! X" flutuante
-- Screen shake
-- Hit stop (pausa do tempo)
-- Flash colorido
+### Loot Tables Personalizadas
+Inimigos podem ter loot tables específicas com:
+- Chances de drop customizadas
+- Quantidades mínimas/máximas
+- Tipos específicos de munição/ervas
 
-## 5. Drone Companion
+## 5. Inventário
 
-**Características:**
-- Segue o jogador
-- Orbita ao redor do jogador
-- Auto-target e dispara em inimigos próximos
-- Dano: 1 por tiro
-- Cadência: 0.3s
--_RANGE: 15 unidades
+### Mochila (Backpack)
+- Slots iniciais: 12
+- Máximo: 48
+- Custos de upgrade: 100, 250, 500, 1000
 
-**Visual:**
-- Esfera verde com glow
-- Partículas de thruster
-- Pulsação suave
+### Categorias de Itens
+- **Armas**: Armas compradas
+- **Munição**: Balas para armas
+- **Recuperação**: Injeções e itens de cura
+- **Ervas**: Ervas para crafting
 
-## 6. Efeitos Visuais
-
-**Screen Effects:**
-- Screen shake em explosões
-- Hit stop ao acertar críticos
-- Slow motion (30% velocidade)
-- Vignette pulsante em dano
-- Overlays de dano/crit/shield
-
-**Hit Effects:**
-- Partículas de impacto por tipo de bala
-- Explosão de morte com cor do inimigo
-- Trails nas balas
-
-**UI Animations:**
-- Combo popup com bounce
-- Score/coins com pulse
-- Level up effect
-- Transições suaves
-
-## 7. Arquivos Criados
+## 6. Arquivos Criados
 
 | Arquivo | Função |
 |---------|--------|
-| `WeaponData.cs` | ScriptableObject de armas |
-| `WeaponShopController.cs` | Controlador da loja |
-| `CoinDropController.cs` | Drop de moedas |
-| `WeaponShopItem.cs` | Item da loja |
-| `ComboSystem.cs` | Sistema de combo |
-| `CriticalHitSystem.cs` | Sistema de críticos |
-| `DroneController.cs` | Drone companion |
-| `GameEffectsManager.cs` | Efeitos visuais globais |
-| `HitEffects.cs` | Efeitos de hit |
-| `BulletEffects.cs` | Efeitos nas balas |
-| `DamagePopup.cs` | Números de dano flutuantes |
+| `MerchantItemsDatabase.cs` | Database de todos os itens do mercador |
+| `MerchantUIController.cs` | UI completa do mercador com abas |
+| `HerbMixingSystem.cs` | Sistema de mistura de ervas estilo RE4 |
+| `ItemDropSystem.cs` | Sistema de drops de munição, ervas e moedas |
 
-## 8. Controles
+## 7. Controles
 
-- **W/A/S/D** - Movimento
-- **Mouse** - Mirar
-- **Click** - Atirar
-- **1/2/3** - Trocar armas
-- **Q** - Abrir/fechar loja
-- **ESC** - Pausar
+- **Tab/I** - Abrir inventário
+- **E** - Interagir com mercador
+- **Q** - Abrir loja de armas (sistema anterior)
+
+## 8. UI do Mercador
+
+### Abas
+1. **Armas** - Lista de armas disponíveis
+2. **Munição** - Balas para cada arma
+3. **Recuperação** - Injeções e curas
+4. **Ervas** - Ervas para mistura
+5. **Misturar** - Abre painel de crafting
+
+### Painel de Info
+- Nome do item
+- Descrição
+- Preço
+- Estatísticas
+- Botão Comprar
