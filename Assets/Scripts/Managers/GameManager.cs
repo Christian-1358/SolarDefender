@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using SolarDefender.Database;
 using SolarDefender.Database.Models;
+using SolarDefender.FirstPerson;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,6 +42,12 @@ public class GameManager : MonoBehaviour
     public bool isRunning = false;
     public bool isPaused = false;
     public bool shopOpen = false;
+
+    [Header("First Person Mode")]
+    public bool firstPersonMode = false;
+    public GameObject firstPersonController;
+    public GameObject firstPersonCamera;
+    public GameObject thirdPersonShip;
 
     [Header("Object Pools")]
     public List<GameObject> enemies = new List<GameObject>();
@@ -94,6 +101,18 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && isRunning)
         {
             ToggleWeaponShop();
+        }
+
+        // Toggle First Person Mode
+        if (Input.GetKeyDown(KeyCode.F) && isRunning)
+        {
+            ToggleFirstPersonMode();
+        }
+
+        // Toggle Inventory
+        if (Input.GetKeyDown(KeyCode.Tab) && isRunning)
+        {
+            ToggleInventory();
         }
     }
 
@@ -380,7 +399,7 @@ public class GameManager : MonoBehaviour
                 currentPlayer.Id,
                 score,
                 currentLevel + 1,
-                0, // combo máximo não registrado aqui
+                0,
                 Time.time
             );
             DatabaseAccess.Instance.Player.AddDeath(currentPlayer.Id);
@@ -508,4 +527,56 @@ public class GameManager : MonoBehaviour
         }
         return 0;
     }
+
+    // ==================== FIRST PERSON MODE ====================
+
+    public void ToggleFirstPersonMode()
+    {
+        firstPersonMode = !firstPersonMode;
+        SetFirstPersonMode(firstPersonMode);
+    }
+
+    public void SetFirstPersonMode(bool enabled)
+    {
+        firstPersonMode = enabled;
+
+        if (enabled)
+        {
+            // Ativa modo primeira pessoa
+            if (thirdPersonShip != null) thirdPersonShip.SetActive(false);
+            if (firstPersonController != null) firstPersonController.SetActive(true);
+            if (firstPersonCamera != null) firstPersonCamera.SetActive(true);
+
+            // Esconde HUD da terceira pessoa
+            UIManager.Instance.HideThirdPersonHUD();
+
+            // Trava cursor
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            // Desativa modo primeira pessoa
+            if (thirdPersonShip != null) thirdPersonShip.SetActive(true);
+            if (firstPersonController != null) firstPersonController.SetActive(false);
+            if (firstPersonCamera != null) firstPersonCamera.SetActive(false);
+
+            // Mostra HUD da terceira pessoa
+            UIManager.Instance.ShowThirdPersonHUD();
+
+            // Destrava cursor
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
+    public void ToggleInventory()
+    {
+        if (BackpackInventory.Instance != null)
+        {
+            BackpackInventory.Instance.ToggleInventory();
+        }
+    }
+
+    public bool IsFirstPersonMode() => firstPersonMode;
 }
