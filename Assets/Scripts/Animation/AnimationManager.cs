@@ -390,7 +390,7 @@ namespace SolarDefender.Animation
             txt.color = color;
             txt.fontSize = 24;
             txt.alignment = TextAnchor.MiddleCenter;
-            txt.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+            txt.resizeTextForBestFit = true;
 
             RectTransform rect = popup.GetComponent<RectTransform>();
             rect.sizeDelta = new Vector2(200, 50);

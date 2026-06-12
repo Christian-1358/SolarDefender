@@ -160,16 +160,22 @@ namespace SolarDefender.Animation
             PlayExplosion(position);
 
             // Segunda explosão com delay
-            Invoke(() => PlayExplosion(position, new Color(1f, 1f, 0f)), 0.1f);
+            StartCoroutine(DelayedExplosion(position, new Color(1f, 1f, 0f), 0.1f));
 
             // Terceira explosão
-            Invoke(() => PlayExplosion(position, Color.white), 0.2f);
+            StartCoroutine(DelayedExplosion(position, Color.white, 0.2f));
 
             // Screen shake
             if (Camera.main != null)
             {
                 AnimationManager.Instance.Shake(Camera.main.transform, 0.5f, 0.5f);
             }
+        }
+
+        System.Collections.IEnumerator DelayedExplosion(Vector3 position, Color color, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            PlayExplosion(position, color);
         }
 
         public void PlayNuclearExplosion(Vector3 position)
