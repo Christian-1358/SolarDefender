@@ -55,6 +55,26 @@ public class UIManager : MonoBehaviour
     [Header("Upgrade Shop")]
     public UpgradeItem[] upgradeItems;
 
+    [Header("Combo Display")]
+    public GameObject comboPanel;
+    public TextMeshProUGUI comboCountText;
+    public TextMeshProUGUI comboMultiplierText;
+    public Animator comboAnimator;
+
+    [Header("Level Up Animation")]
+    public GameObject levelUpEffect;
+    public TextMeshProUGUI levelUpText;
+
+    [Header("Screen Effects")]
+    public Image damageOverlay;
+    public Image slowMotionOverlay;
+    public Image vignetteOverlay;
+
+    [Header("Animated Elements")]
+    public Animator hudAnimator;
+    public Animator scoreAnimator;
+    public Animator coinsAnimator;
+
     [System.Serializable]
     public class UpgradeItem
     {
@@ -107,6 +127,8 @@ public class UIManager : MonoBehaviour
         levelCompleteScreen.SetActive(true);
         levelCompleteNameText.text = planetName;
         rewardText.text = $"+{reward} Moedas";
+
+        ShowLevelUpEffect(planetName);
     }
 
     public void HideLevelComplete()
@@ -133,6 +155,11 @@ public class UIManager : MonoBehaviour
         {
             scoreText.text = score.ToString("N0");
         }
+
+        if (scoreAnimator != null)
+        {
+            scoreAnimator.SetTrigger("ScoreChanged");
+        }
     }
 
     public void UpdateCoins(int coins)
@@ -140,6 +167,70 @@ public class UIManager : MonoBehaviour
         if (coinsText != null)
         {
             coinsText.text = coins.ToString();
+        }
+
+        if (coinsAnimator != null)
+        {
+            coinsAnimator.SetTrigger("CoinsChanged");
+        }
+    }
+
+    public void ShowCombo(int comboCount, float multiplier)
+    {
+        if (comboPanel != null)
+        {
+            comboPanel.SetActive(comboCount > 0);
+        }
+
+        if (comboCountText != null)
+        {
+            comboCountText.text = comboCount.ToString();
+        }
+
+        if (comboMultiplierText != null)
+        {
+            comboMultiplierText.text = $"{multiplier:F1}x";
+        }
+
+        if (comboAnimator != null && comboCount > 1)
+        {
+            comboAnimator.SetTrigger("ComboPopup");
+        }
+    }
+
+    public void HideCombo()
+    {
+        if (comboPanel != null)
+        {
+            comboPanel.SetActive(false);
+        }
+    }
+
+    public void ShowLevelUpEffect(string levelName)
+    {
+        if (levelUpEffect != null)
+        {
+            levelUpEffect.SetActive(true);
+            if (levelUpText != null)
+            {
+                levelUpText.text = $"{levelName} COMPLETO!";
+            }
+
+            var animator = levelUpEffect.GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.SetTrigger("LevelUp");
+            }
+
+            Invoke(nameof(HideLevelUpEffect), 2f);
+        }
+    }
+
+    void HideLevelUpEffect()
+    {
+        if (levelUpEffect != null)
+        {
+            levelUpEffect.SetActive(false);
         }
     }
 

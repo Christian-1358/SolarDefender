@@ -277,6 +277,17 @@ O projeto usa **Mono.Data.Sqlite** (incluso no Unity). Para garantir:
 
 ## 🎯 Sistemas Implementados
 
+### Sistema de Animações
+```
+Assets/Scripts/Animation/
+├── AnimationManager.cs    # Tweens: move, scale, rotate, fade, shake
+├── ShipAnimator.cs        # Nave: idle, thrust, damage, boost, death
+├── EnemyAnimator.cs      # Inimigos: idle, move, attack, damage, death
+├── BossAnimator.cs       # Chefes: entry épico, fases, enrage, morte dramática
+├── UIAnimator.cs        # UI: hover, click, panels, progress bars, typewriter
+└── EffectsAnimator.cs    # Efeitos: explosões, impactos, power-ups, damage numbers
+```
+
 ### Sistema de Áudio
 ```
 Assets/Scripts/Audio/
@@ -360,6 +371,13 @@ Assets/Scripts/
 ├── Achievements/
 │   ├── AchievementData.cs
 │   └── AchievementManager.cs
+├── Animation/
+│   ├── AnimationManager.cs    # Tweens globais
+│   ├── ShipAnimator.cs       # Nave do jogador
+│   ├── EnemyAnimator.cs      # Inimigos
+│   ├── BossAnimator.cs       # Chefes
+│   ├── UIAnimator.cs         # UI elements
+│   └── EffectsAnimator.cs    # Efeitos visuais
 ├── Audio/
 │   └── AudioManager.cs
 ├── Challenges/

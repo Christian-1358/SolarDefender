@@ -28,22 +28,29 @@ public class BulletController : MonoBehaviour
         direction = dir;
         bulletType = type;
 
+        // Get damage from weapon shop if available
+        int shopDamage = 0;
+        if (WeaponShopController.Instance != null)
+        {
+            shopDamage = WeaponShopController.Instance.GetWeaponDamage(type);
+        }
+
         // Set speed based on type
         switch (type)
         {
             case "laser":
                 speed = 30f;
-                damage = 3;
+                damage = shopDamage > 0 ? shopDamage : 3;
                 if (meshRenderer != null) meshRenderer.material.color = laserColor;
                 break;
             case "missile":
                 speed = 15f;
-                damage = 5;
+                damage = shopDamage > 0 ? shopDamage : 5;
                 if (meshRenderer != null) meshRenderer.material.color = missileColor;
                 break;
             default:
                 speed = 20f;
-                damage = 1;
+                damage = shopDamage > 0 ? shopDamage : 1;
                 if (meshRenderer != null) meshRenderer.material.color = basicColor;
                 break;
         }
@@ -116,7 +123,24 @@ public class BulletController : MonoBehaviour
             EnemyController enemy = other.GetComponent<EnemyController>();
             if (enemy != null)
             {
-                enemy.TakeDamage(damage);
+                bool isCritical = CriticalHitSystem.Instance != null && CriticalHitSystem.Instance.IsCriticalHit();
+                int finalDamage = isCritical && CriticalHitSystem.Instance != null
+                    ? CriticalHitSystem.Instance.CalculateDamage(damage)
+                    : damage;
+
+                enemy.TakeDamage(finalDamage);
+
+                if (CriticalHitSystem.Instance != null)
+                {
+                    CriticalHitSystem.Instance.OnHitConfirmed(isCritical, enemy.transform.position, finalDamage);
+                }
+
+                HitEffects.PlayHitEffect(enemy.transform.position, bulletType, isCritical);
+
+                if (isCritical && GameEffectsManager.Instance != null)
+                {
+                    GameEffectsManager.Instance.TriggerCriticalEffect();
+                }
             }
             Destroy(gameObject);
         }

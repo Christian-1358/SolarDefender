@@ -44,6 +44,8 @@ public class EnemyController : MonoBehaviour
         baseColor = data.color;
         targetPlanet = planet;
         targetPlanetIndex = data.targetPlanetIndex;
+        minCoinDrop = data.minCoinDrop;
+        maxCoinDrop = data.maxCoinDrop;
 
         startPosition = spawnPos;
         transform.position = spawnPos;
@@ -118,13 +120,26 @@ public class EnemyController : MonoBehaviour
 
     void Die()
     {
-        // Add score
-        GameManager.Instance.AddScore(points);
+        // Add score with combo multiplier
+        int finalScore = points;
+        if (ComboSystem.Instance != null)
+        {
+            finalScore = ComboSystem.Instance.GetComboScore(points);
+            ComboSystem.Instance.RegisterKill();
+        }
+        GameManager.Instance.AddScore(finalScore);
 
         // Spawn death effect
         if (deathEffect != null)
         {
             Instantiate(deathEffect, transform.position, Quaternion.identity);
+        }
+
+        HitEffects.PlayDeathEffect(transform.position, baseColor);
+
+        if (GameEffectsManager.Instance != null)
+        {
+            GameEffectsManager.Instance.TriggerKillEffect(transform.position);
         }
 
         // Always drop coins based on enemy type
@@ -138,6 +153,7 @@ public class EnemyController : MonoBehaviour
 
         // Notify game manager
         GameManager.Instance.RemoveEnemy(gameObject);
+        GameManager.Instance.RecordEnemyDefeated(enemyName);
 
         // Destroy
         Destroy(gameObject);

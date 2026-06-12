@@ -12,4 +12,8 @@ public class EnemyData : ScriptableObject
     public int points = 10;
     public bool isBoss = false;
     public int targetPlanetIndex = 0;
+
+    [Header("Coin Drop")]
+    public int minCoinDrop = 3;
+    public int maxCoinDrop = 10;
 }

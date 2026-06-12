@@ -24,6 +24,19 @@ public class GameManager : MonoBehaviour
     public float lastShotTime = 0f;
     public float shotInterval = 0.2f;
 
+    [Header("Weapon Shop")]
+    public GameObject weaponShopPanel;
+
+    [Header("Drone")]
+    public GameObject dronePrefab;
+    public Transform droneSpawnPoint;
+    private GameObject activeDrone;
+
+    [Header("Effects")]
+    public GameObject hitEffectsPrefab;
+    public GameObject damagePopupPrefab;
+    public Transform damagePopupContainer;
+
     [Header("Game Status")]
     public bool isRunning = false;
     public bool isPaused = false;
@@ -71,6 +84,39 @@ public class GameManager : MonoBehaviour
         InitializeDatabase();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && isRunning)
+        {
+            ToggleWeaponShop();
+        }
+    }
+
+    public void ToggleWeaponShop()
+    {
+        if (weaponShopPanel != null)
+        {
+            bool isOpen = weaponShopPanel.activeSelf;
+            weaponShopPanel.SetActive(!isOpen);
+            isPaused = !isOpen;
+            shopOpen = !isOpen;
+
+            if (!isOpen && WeaponShopController.Instance != null)
+            {
+                WeaponShopController.Instance.OpenShop();
+            }
+            else if (isOpen && WeaponShopController.Instance != null)
+            {
+                WeaponShopController.Instance.CloseShop();
+            }
+        }
+    }
+
     void InitializeDatabase()
     {
         // Garante que o DatabaseManager existe
@@ -113,7 +159,18 @@ public class GameManager : MonoBehaviour
         levelStartTime = Time.time;
 
         ClearAllObjects();
+        SpawnDrone();
         SpawnLevel();
+    }
+
+    void SpawnDrone()
+    {
+        if (dronePrefab != null && droneSpawnPoint != null)
+        {
+            if (activeDrone != null) Destroy(activeDrone);
+            activeDrone = Instantiate(dronePrefab, droneSpawnPoint.position, Quaternion.identity);
+            activeDrone.GetComponent<DroneController>().Initialize();
+        }
     }
 
     public void SpawnLevel()
@@ -236,11 +293,21 @@ public class GameManager : MonoBehaviour
             shield -= absorbed;
             amount -= absorbed;
             UIManager.Instance.UpdateShieldBar(shield, maxShield);
+
+            if (GameEffectsManager.Instance != null)
+            {
+                GameEffectsManager.Instance.TriggerShieldHitEffect();
+            }
         }
 
         health -= amount;
         UIManager.Instance.UpdateHealthBar(health, maxHealth);
         UIManager.Instance.ShowDamageEffect();
+
+        if (GameEffectsManager.Instance != null)
+        {
+            GameEffectsManager.Instance.TriggerDamageEffect();
+        }
 
         if (health <= 0)
         {
@@ -352,6 +419,8 @@ public class GameManager : MonoBehaviour
         bullets.Clear();
         asteroids.Clear();
         powerups.Clear();
+
+        if (activeDrone != null) Destroy(activeDrone);
 
         currentBoss = null;
         UIManager.Instance.HideBossHealth();

@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
     public MeshRenderer engineRenderer;
     public Color shipColor = new Color(0f, 0.78f, 1f);
 
+    [Header("Effects")]
+    public GameObject muzzleFlash;
+    public ParticleSystem engineParticleSystem;
+    public TrailRenderer[] bulletTrails;
+
     private Camera mainCamera;
     private Vector3 targetPosition;
     private float enginePulse = 0f;
@@ -70,7 +75,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
         {
             float timeSinceLastShot = Time.time - GameManager.Instance.lastShotTime;
-            float interval = GameManager.Instance.shotInterval;
+            float interval = GetCurrentFireRate();
 
             if (timeSinceLastShot >= interval)
             {
@@ -83,6 +88,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) GameManager.Instance.SwitchWeapon("basic");
         if (Input.GetKeyDown(KeyCode.Alpha2) && GameManager.Instance.laserUnlocked) GameManager.Instance.SwitchWeapon("laser");
         if (Input.GetKeyDown(KeyCode.Alpha3) && GameManager.Instance.missileUnlocked) GameManager.Instance.SwitchWeapon("missile");
+    }
+
+    float GetCurrentFireRate()
+    {
+        if (WeaponShopController.Instance != null)
+        {
+            return WeaponShopController.Instance.GetWeaponFireRate(GameManager.Instance.currentWeapon);
+        }
+        return GameManager.Instance.shotInterval;
     }
 
     void Shoot()
@@ -103,7 +117,40 @@ public class PlayerController : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefabToUse, bulletSpawnPoint.position, Quaternion.identity);
             bullet.GetComponent<BulletController>().Initialize(direction, GameManager.Instance.currentWeapon);
             GameManager.Instance.bullets.Add(bullet);
+
+            PlayMuzzleFlash();
+            RecoilEffect();
         }
+    }
+
+    void PlayMuzzleFlash()
+    {
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.SetActive(true);
+            Invoke(nameof(HideMuzzleFlash), 0.05f);
+        }
+    }
+
+    void HideMuzzleFlash()
+    {
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.SetActive(false);
+        }
+    }
+
+    void RecoilEffect()
+    {
+        StartCoroutine(RecoilCoroutine());
+    }
+
+    System.Collections.IEnumerator RecoilCoroutine()
+    {
+        Vector3 originalScale = transform.localScale;
+        transform.localScale = originalScale * 0.95f;
+        yield return new WaitForSeconds(0.05f);
+        transform.localScale = originalScale;
     }
 
     void AnimateEngine()
