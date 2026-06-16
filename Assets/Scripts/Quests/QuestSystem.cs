@@ -137,7 +137,7 @@ namespace SolarDefender.Quests
 
             allQuests.Add(new Quest
             {
-                questId "armor_upgrade",
+                questId = "armor_upgrade",
                 questName = "Atualização de Armadura",
                 description = "Compre um upgrade de escudo no mercador",
                 type = QuestType.Collect,
@@ -297,7 +297,6 @@ namespace SolarDefender.Quests
             Debug.Log($"Quest failed: {quest.questName}");
             SaveQuestProgress();
         }
-
         public List<Quest> GetAvailableQuests()
         {
             return allQuests.FindAll(q =>

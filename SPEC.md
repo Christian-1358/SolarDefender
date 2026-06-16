@@ -1,116 +1,161 @@
 # Solar Defender - Sistema Completo
 
-## Sistema de Carregamento de Armas
+## Sistemas Implementados
 
-### Mecânica de Reload
-- **Tecla R** - Recarregar arma
-- Tempo de reload: 2 segundos
-- Barra de progresso durante reload
-- **Não recarrega se:**
-  - Carregador cheio
-  - Sem munição de reserva
-  - Já está recarregando
+### 1. Sistema de Dodge/Roll
+- **Tecla Espaço** - Roll com invencibilidade
+- Distância: 5 unidades
+- Duração: 0.3s
+- Cooldown: 1s
+- Trail visual durante dodge
+- Invencibilidade durante 0.25s
 
-### Sistema de Munição
-| Arma | Carregador | Reserva Máxima |
-|------|------------|----------------|
-| Glock 17 | 17 balas | 200 |
-| Doze Shotgun | 8 cartuchos | 100 |
-| Minigun | 100 balas | 500 |
-| Uzi | 30 balas | 200 |
+### 2. Sistema de Ataque Corpo a Corpo
+- **Tecla V** - Ataque melee
+- Range: 2 unidades
+- Dano: 50
+- Trail visual da arma
+- Efeito de hit
 
-## Sistema de Gráficos Aprimorados
+### 3. Sistema de Granadas
+- **Tecla G** - Lançar granada
+- Trajetória parabólica com preview
+- Explosão com raio de 5 unidades
+- Dano: 100 (com falloff)
+- Máximo: 5 granadas
 
-### Bosses - Modelos Detalhados
+### 4. Menu Principal e Pause
+- **Menu Principal**: Novo Jogo, Continuar, Carregar, Configurações, Controles, Sair
+- **Menu Pause**: Continuar, Reiniciar, Configurações, Menu Principal
+- **Tecla ESC** - Pause/Resume
+- Transições animadas
 
-| Boss | Estrutura | Efeitos Visuais |
-|------|-----------|-----------------|
-| **Scout Commander** | Corpo esférico + cabeça + 8 tentáculos segmentados + 4 olhos compostos + 6 espinhos | Anéis de corpo, orbs flutuantes, glow nos olhos |
-| **Drone Lord** | Núcleo + 6 placas hexagonais + cúpula + 4 jatos hover | Glow interno ciano, linhas de energia, sensor eye |
-| **Alien Commander** | Torso + ombros + cabeça + mandíbulas + braços bio-mecânicos | Crista cranial, orbs flutuantes, spines nas costas |
-| **Giant Commander** | Corpo massivo + 5 olhos cluster + 3 bocas + braços/pernas colossais | Spikes por todo corpo, detritos flutuantes |
-| **Destroyer Prime** | Casco + ponte + 6 pods + 4 exaustores + asas | Janelas de vidro, luzes de navegação, antenas |
-| **Final Boss** | Core geométrico + 6 esferas orbitais + 8 espinhos + 8 tentáculos | Anéis de energia, aura de partículas, orbs de energia |
+### 5. Sistema de XP e Level
+- XP por kills e missões
+- Level up a cada 100 XP (multiplicador 1.5x)
+- Pontos de skill a cada level
+- Bônus de +10 HP a cada 5 levels
 
-### Armas - Modelos Detalhados
+### 6. Árvore de Habilidades
+- **Tecla K** - Abrir/Fechar
+- Habilidades de: Dano, HP, Velocidade, Cooldown, Especial
+- Pré-requisitos para habilidades avançadas
+- Visualização de nodes bloqueados/desbloqueados
 
-| Arma | Partes |
-|------|--------|
-| **Glock 17** | Slide com serrilhas, coronha, cão, mira, carregador, cano |
-| **Shotgun** | Cano com ribs, pump com grooves, receiver, stock curvo, freio de boca |
-| **Uzi** | Cano, corpo, coronha dobrável, grip, carregador, mira |
-| **Minigun** | 6 canos, housing do motor, estrutura, grip, pés de apoio, mira |
+### 7. Post-Processing
+- Bloom dinâmico
+- Vignette (pior em baixa vida)
+- Color grading
+- Perfil de combate (bloom aumentado)
+- Perfil de baixa vida
 
-### Efeitos Visuais
+### 8. Sistema de Música Dinâmica
+- Música do menu principal
+- Música de exploração
+- Música de combate
+- Música de boss
+- Música de vitória/derrota
+- Crossfade suave entre músicas
 
-| Efeito | Descrição |
-|--------|-----------|
-| **Bloom** | Glow em olhos, jatos, anéis de energia |
-| **Idle Animation** | Bosses flutuam e rotacionam suavemente |
-| **Pulsing Effect** | Olhos pulsam com intensidade variada |
-| **Blinking Effect** | Luzes de navegação piscam |
-| **Trail Renderer** | Tiros deixam rastros |
-| **Muzzle Flash** | Flash ao atirar |
-| **Hit Sparks** | Faíscas ao acertar inimigos |
-| **Blood/Metal Splatter** | Efeitos de impacto orgânicos/metálicos |
+### 9. Sistema de Conquistas
+- Por kills, fases, bosses, moedas
+- Popup de conquista desbloqueada
+- Som de conquista
+- Progresso salvo
 
-### Animações de Boss
-- **Bob** - Subir e descer suavemente
-- **Rotate** - Rotação constante
-- **Tilt** - Inclinação baseada no movimento
-- **Floating** - Objetos flutuam ao redor
+### 10. Mini-Mapa
+- Indicadores de planetas
+- Posição do jogador (centro)
+- Dots de inimigos
+- Indicador de boss
+- Indicador de direção do objetivo
 
-### Cores dos Bosses
-| Boss | Cor |
-|------|-----|
-| Scout Commander | Vermelho escuro (0.6, 0.2, 0.2) |
-| Drone Lord | Cinza metálico (0.4, 0.4, 0.5) |
-| Alien Commander | Verde púrpura (0.3, 0.5, 0.2) |
-| Giant Commander | Laranja acastanhado (0.5, 0.3, 0.2) |
-| Destroyer Prime | Azul escuro (0.2, 0.3, 0.5) |
-| Final Boss | Roxo (0.4, 0.1, 0.5) |
+### 11. Sistema de Fases de Boss
+- Múltiplas fases por boss
+- Transições com warning
+- Mudança de stats por fase
+- Slow motion na transição
 
-## Sistema de Capítulos e Chefes
+## Controles Completos
 
-### Estrutura de Capítulos
-| Capítulo | Planeta | Boss | HP | Recompensa |
-|----------|---------|------|-----|------------|
-| 1 | Mercúrio | Scout Commander | 100 | R$200 |
-| 2 | Vênus | Drone Lord | 150 | R$300 |
-| 3 | Marte | Alien Commander | 200 | R$500 |
-| 4 | Júpiter | Giant Commander | 300 | R$750 |
-| 5 | Saturno | Destroyer Prime | 400 | R$1000 |
-| 6 | Netuno | Final Boss | 500 | R$2000 |
+| Tecla | Ação |
+|-------|------|
+| W/A/S/D | Movimento |
+| Mouse | Mirar |
+| Click | Atirar |
+| R | Recarregar |
+| Espaço | Dodge/Roll |
+| V | Ataque melee |
+| G | Lançar granada |
+| Q | Loja de armas |
+| K | Árvore de habilidades |
+| Tab | Inventário |
+| E | Mercador |
+| ESC | Pause |
 
-## Sistema de Ervas (RE4)
-| Erva | Efeito |
-|------|--------|
-| Verde | +10 HP |
-| Vermelha | +30 HP |
-| Verde+Vermelha | +50 HP |
-| Verde+Amarela+Vermelha | +100 HP |
+## Estrutura de Capítulos
+
+| Capítulo | Planeta | Boss | HP | Fases |
+|----------|---------|------|-----|-------|
+| 1 | Mercúrio | Scout Commander | 100 | 2 |
+| 2 | Vênus | Drone Lord | 150 | 2 |
+| 3 | Marte | Alien Commander | 200 | 3 |
+| 4 | Júpiter | Giant Commander | 300 | 3 |
+| 5 | Saturno | Destroyer Prime | 400 | 4 |
+| 6 | Netuno | Final Boss | 500 | 5 |
 
 ## Arquivos Criados
 
 | Arquivo | Função |
 |---------|--------|
-| `EnhancedBossMeshGenerator.cs` | Modelos detalhados de bosses com efeitos |
-| `GraphicsEnhancer.cs` | Configurações globais de gráficos |
-| `WeaponMeshGenerator.cs` | Modelos detalhados de armas |
-| `WeaponAmmoSystem.cs` | Sistema de munição e reload |
+| `DodgeRollSystem.cs` | Roll, melee, granadas |
+| `MainMenuManager.cs` | Menus principal e pause |
+| `PlayerProgression.cs` | XP, level, skill tree |
+| `PostProcessingEffects.cs` | Post-processing, música, conquistas |
+| `MiniMapSystem.cs` | Mini-mapa, fases de boss |
+| `EnhancedBossMeshGenerator.cs` | Modelos de bosses |
+| `GraphicsEnhancer.cs` | Sistema de gráficos |
+| `WeaponMeshGenerator.cs` | Modelos de armas |
+| `WeaponAmmoSystem.cs` | Sistema de munição |
 | `InterplanetaryBoss.cs` | Boss interplanetário |
 | `ChapterManager.cs` | Gerenciador de capítulos |
 | `CutsceneManager.cs` | Sistema de cutscenes |
-| `BossFactory.cs` | Factory para criar bosses |
+| `BossFactory.cs` | Factory de bosses |
 | `MerchantItemsDatabase.cs` | Database do mercador |
 | `HerbMixingSystem.cs` | Sistema de mistura de ervas |
 | `ItemDropSystem.cs` | Sistema de drops |
+| `ComboSystem.cs` | Sistema de combo |
+| `CriticalHitSystem.cs` | Sistema de críticos |
+| `DroneController.cs` | Drone companion |
+| `GameEffectsManager.cs` | Efeitos visuais |
+| `HitEffects.cs` | Efeitos de hit |
+| `BulletEffects.cs` | Efeitos nas balas |
+| `DamagePopup.cs` | Números de dano |
+| `WeaponData.cs` | ScriptableObject de armas |
+| `WeaponShopController.cs` | Controlador da loja |
+| `CoinDropController.cs` | Drop de moedas |
+| `WeaponShopItem.cs` | Item da loja |
+| `MerchantUIController.cs` | UI do mercador |
+| `ChapterDefinitions.cs` | Definições de capítulos |
 
-## Controles
-- **W/A/S/D** - Movimento
-- **Mouse** - Mirar/Atirar
-- **R** - Recarregar arma
-- **Q** - Loja
-- **Tab** - Inventário
-- **E** - Mercador
-- **ESC** - Pausar
+## Configurações no Unity
+
+### Para Ativar Post-Processing:
+1. Instale o pacote "Post Processing" via Package Manager
+2. Adicione `PostProcessingEffects` à câmera principal
+3. Crie Post Process Profiles (normal, combat, lowHealth)
+
+### Para Ativar Música:
+1. Adicione `DynamicMusicSystem` a um GameObject
+2. Configure AudioClips para cada estado
+3. Configure AudioSource com loop enabled
+
+### Para Ativar Skill Tree:
+1. Crie painel UI com SkillNodes
+2. Configure `availableSkills` list
+3. Adicione `PlayerProgression` component
+
+### Para Ativar Mini-Mapa:
+1. Crie RawImage para o mapa
+2. Adicione `MiniMapSystem` component
+3. Configure `planetIndicators` array
