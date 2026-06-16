@@ -9,6 +9,26 @@
     "/home/developer/Unity/Hub/Editor/6000.0.77f1/Editor/Data/Resources/PackageManager/BuiltInPackages/BuiltInPackagesCombined.sha1"
   ],
   "outputs": {
+    "com.unity.textmeshpro@5.0.0": {
+      "name": "com.unity.textmeshpro",
+      "displayName": "TextMeshPro",
+      "resolvedPath": "/home/developer/Documents/SolarDefender/Library/PackageCache/com.unity.textmeshpro@53f43edfd2e0",
+      "fingerprint": "53f43edfd2e0bf2438ca6e2038ba12107a181253",
+      "editorCompatibility": "2023.2.0a1",
+      "version": "5.0.0",
+      "source": "builtin",
+      "testable": false
+    },
+    "com.unity.postprocessing@3.4.0": {
+      "name": "com.unity.postprocessing",
+      "displayName": "Post Processing",
+      "resolvedPath": "/home/developer/Documents/SolarDefender/Library/PackageCache/com.unity.postprocessing@026b2a0827a4",
+      "fingerprint": "026b2a0827a438e3079df62a60ca03d54961393d",
+      "editorCompatibility": "2019.4.19f1",
+      "version": "3.4.0",
+      "source": "registry",
+      "testable": false
+    },
     "com.unity.multiplayer.center@1.0.0": {
       "name": "com.unity.multiplayer.center",
       "displayName": "Multiplayer Center",
@@ -288,6 +308,16 @@
       "displayName": "Hierarchy Core",
       "resolvedPath": "/home/developer/Documents/SolarDefender/Library/PackageCache/com.unity.modules.hierarchycore",
       "version": "1.0.0",
+      "source": "builtin",
+      "testable": false
+    },
+    "com.unity.ugui@2.0.0": {
+      "name": "com.unity.ugui",
+      "displayName": "Unity UI",
+      "resolvedPath": "/home/developer/Documents/SolarDefender/Library/PackageCache/com.unity.ugui@f6c2dd463945",
+      "fingerprint": "f6c2dd4639453382a5b90b5362d780d9c2c4f482",
+      "editorCompatibility": "2019.2.0a1",
+      "version": "2.0.0",
       "source": "builtin",
       "testable": false
     }

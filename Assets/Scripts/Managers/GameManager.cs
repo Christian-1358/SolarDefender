@@ -138,18 +138,17 @@ public class GameManager : MonoBehaviour
 
     void InitializeDatabase()
     {
-        // Garante que o DatabaseManager existe
         if (DatabaseManager.Instance == null)
         {
             GameObject dbObj = new GameObject("DatabaseManager");
             dbObj.AddComponent<DatabaseManager>();
         }
 
-        // Cria ou obtém jogador padrão
         if (DatabaseAccess.Instance != null)
         {
-            currentPlayer = DatabaseAccess.Instance.GetOrCreatePlayer("Commander");
-            Debug.Log($"Jogador carregado: {currentPlayer.PlayerName} - Score: {currentPlayer.TotalScore}");
+            coins = DatabaseManager.Instance.GetPlayerCoins();
+            score = DatabaseManager.Instance.GetPlayerScore();
+            Debug.Log($"Dados carregados - Coins: {coins}, Score: {score}");
         }
     }
 

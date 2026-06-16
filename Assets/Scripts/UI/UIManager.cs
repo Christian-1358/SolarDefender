@@ -35,12 +35,6 @@ public class UIManager : MonoBehaviour
     public Image[] weaponIcons;
     public GameObject[] powerupSlots;
 
-    [Header("Damage Effect")]
-    public Image damageOverlay;
-
-    [Header("Crosshair")]
-    public Image crosshair;
-
     [Header("Game Over")]
     public TextMeshProUGUI finalScoreText;
     public TextMeshProUGUI finalLevelText;

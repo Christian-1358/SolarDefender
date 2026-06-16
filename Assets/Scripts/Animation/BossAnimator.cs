@@ -65,7 +65,7 @@ namespace SolarDefender.Animation
         private Color[] originalColors;
 
         public event Action OnEntryComplete;
-        public event Action OnPhaseTransition;
+        public event Action<int> OnPhaseTransition;
         public event Action OnEnrage;
         public event Action OnDeathComplete;
 
@@ -262,7 +262,7 @@ namespace SolarDefender.Animation
 
         // ==================== PHASE TRANSITION ====================
 
-        public void OnPhaseTransition(int newPhase)
+        public void TriggerPhaseTransition(int newPhase)
         {
             if (isDead) return;
             currentPhase = newPhase;
@@ -295,7 +295,7 @@ namespace SolarDefender.Animation
             idleBobAmount *= 1.5f;
             idleBobSpeed *= 1.3f;
 
-            OnPhaseTransition?.Invoke();
+            OnPhaseTransition?.Invoke(currentPhase);
         }
 
         IEnumerator LerpColor(Color from, Color to, float duration)
@@ -505,7 +505,21 @@ namespace SolarDefender.Animation
             }
         }
 
-        IEnumerator ChargeAttack();
+        IEnumerator ChargeAttack()
+        {
+            // Charge attack implementation
+            float elapsed = 0f;
+            float duration = 2f;
+            Vector3 startPos = transform.position;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = elapsed / duration;
+                transform.position = startPos + transform.forward * 10f * t;
+                yield return null;
+            }
+        }
 
         IEnumerator SpiralAttack()
         {
